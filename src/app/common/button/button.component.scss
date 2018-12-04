@@ -9,6 +9,9 @@ $buttonColor: #f1f1f1;
   border: 1px solid darken($buttonColor, 10%);
   cursor: pointer;
   user-select: none;
+  &_flex-block {
+    display: flex;
+  }
   &:hover {
     background: darken($buttonColor, 10%);
   }
