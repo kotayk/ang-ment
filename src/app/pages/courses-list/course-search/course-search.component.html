@@ -1,3 +1,9 @@
-<p>
-  course-search works!
-</p>
+<div class="course-search">
+  <div class="course-search__container">
+    <input [(ngModel)]="searchQuery" class="course-search__input" type="text">
+    <app-button (buttonClick)="onClickSearch()" title="Search"></app-button>
+  </div>
+  <div class="course-search__container">
+    <app-button title="Add course" icon="assets/img/add.png"></app-button>
+  </div>
+</div>

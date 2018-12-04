@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-course-search',
@@ -7,9 +7,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CourseSearchComponent implements OnInit {
 
-  constructor() { }
+  searchQuery: string;
+
+  constructor() {
+  }
 
   ngOnInit() {
   }
+
+  onClickSearch(event: MouseEvent) {
+    console.log(this.searchQuery);
+  }
+
 
 }

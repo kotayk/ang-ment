@@ -2,7 +2,7 @@ $buttonColor: #f1f1f1;
 
 .button {
   background: $buttonColor;
-  display: flex;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
   padding: 4px 7px;
