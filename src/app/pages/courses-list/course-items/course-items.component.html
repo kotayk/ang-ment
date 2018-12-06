@@ -1,32 +1,4 @@
 <div class="course-items">
-  <div class="course-item">
-    <div class="course-item__container">
-      <div class="course-item__info">
-        <div class="course-item__info-inner">
-          <div class="course-item__info-block">
-            Video Course 1
-          </div>
-        </div>
-        <div class="course-item__info-inner">
-          <div class="course-item__info-block">
-            1hr 28min
-          </div>
-          <div class="course-item__info-block">
-            05.29.2018
-          </div>
-        </div>
-      </div>
-      <div class="courses-item__description">
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto asperiores dolorum eius facere harum id laboriosam laudantium nam nulla odio officiis optio, perferendis quia quisquam quo repellat sit soluta veritatis.
-      </div>
-    </div>
-    <div class="course-item__controls">
-      <div class="course-item__button">
-        <app-button flexBlock="true" title="Edit" icon="assets/img/add.png"></app-button>
-      </div>
-      <div class="course-item__button">
-        <app-button flexBlock="true" title="Delete" icon="assets/img/add.png"></app-button>
-      </div>
-    </div>
-  </div>
+  <app-course-item *ngFor="let course of courses" [course]="course" (deleteCourse)="onCourseDelete(course)"></app-course-item>
+  <div class="course-items__more" (click)="onLoadMoreClick()">Load more</div>
 </div>

@@ -5,9 +5,10 @@ import {CommonModule} from '../../common/common.module';
 import {CourseSearchComponent} from './course-search/course-search.component';
 import { FormsModule } from '@angular/forms';
 import { CourseItemsComponent } from './course-items/course-items.component';
+import { CourseItemComponent } from './course-item/course-item.component';
 
 @NgModule({
-  declarations: [CoursesListComponent, CourseSearchComponent, CourseItemsComponent],
+  declarations: [CoursesListComponent, CourseSearchComponent, CourseItemsComponent, CourseItemComponent],
   imports: [
     ngCommon,
     CommonModule,
