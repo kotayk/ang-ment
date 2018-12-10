@@ -1,0 +1,20 @@
+$loadMoreButtonColor: #f1f1f1;
+
+.course-items {
+  padding: 0 10px;
+  &__more {
+    padding: 10px 0;
+    border: 2px solid #a9a9a9;
+    text-align: center;
+    cursor: pointer;
+    background-color: $loadMoreButtonColor;
+    user-select: none;
+    margin-bottom: 15px;
+    &:hover {
+      background-color: darken($loadMoreButtonColor, 10%);
+    }
+    &:active {
+      background-color: darken($loadMoreButtonColor, 15%);
+    }
+  }
+}

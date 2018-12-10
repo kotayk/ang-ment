@@ -1,0 +1,9 @@
+$headerBorderColor: #a9a9a9;
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2px solid $headerBorderColor;
+  padding: 10px;
+}

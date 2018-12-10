@@ -1,0 +1,30 @@
+<div class="course-item">
+  <div class="course-item__container">
+    <div class="course-item__info">
+      <div class="course-item__info-inner">
+        <div class="course-item__info-block">
+          {{course.title}}
+        </div>
+      </div>
+      <div class="course-item__info-inner">
+        <div class="course-item__info-block">
+          {{course.durationTime}}
+        </div>
+        <div class="course-item__info-block">
+          {{course.creationDate}}
+        </div>
+      </div>
+    </div>
+    <div class="courses-item__description">
+      {{course.description}}
+    </div>
+  </div>
+  <div class="course-item__controls">
+    <div class="course-item__button">
+      <app-button flexBlock="true" title="Edit" icon="assets/img/edit.png"></app-button>
+    </div>
+    <div class="course-item__button">
+      <app-button (buttonClick)="onClickDeleteCourse()" flexBlock="true" title="Delete" icon="assets/img/delete.png"></app-button>
+    </div>
+  </div>
+</div>

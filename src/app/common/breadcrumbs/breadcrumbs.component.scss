@@ -1,0 +1,25 @@
+$breadCrumbsBorderColor: #a9a9a9;
+$breadcrumbItemColor: #63bdff;
+
+.breadcrumbs {
+  display: flex;
+  align-items: center;
+  height: 40px;
+  border-bottom: 2px solid $breadCrumbsBorderColor;
+  padding: 0 10px;
+  &__separator {
+    margin: 0 5px;
+  }
+  &__link {
+    cursor: default;
+    &_clickable {
+      color: $breadcrumbItemColor;
+      border-bottom: 1px dotted $breadcrumbItemColor;
+      cursor: pointer;
+      &:hover {
+        color: darken($breadcrumbItemColor, 10%);
+        border-bottom-color: darken($breadcrumbItemColor, 10%);
+      }
+    }
+  }
+}

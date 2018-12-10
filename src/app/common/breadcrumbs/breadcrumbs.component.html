@@ -1,3 +1,10 @@
-<p>
-  breadcrumbs works!
-</p>
+<div class="breadcrumbs">
+  <div *ngFor="let item of path; last as isLast" class="breadcrumbs__item">
+    <span class="breadcrumbs__link" [ngClass]="{'breadcrumbs__link_clickable' :item.isClickable}">
+      {{item.title}}
+    </span>
+    <span *ngIf="!isLast" class="breadcrumbs__separator">
+      >
+    </span>
+  </div>
+</div>

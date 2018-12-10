@@ -1,0 +1,26 @@
+$buttonColor: #f1f1f1;
+
+.button {
+  background: $buttonColor;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px 7px;
+  border: 1px solid darken($buttonColor, 10%);
+  cursor: pointer;
+  user-select: none;
+  &_flex-block {
+    display: flex;
+  }
+  &:hover {
+    background: darken($buttonColor, 10%);
+  }
+  &:active {
+    background: darken($buttonColor, 15%);
+  }
+  &__icon {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+  }
+}
