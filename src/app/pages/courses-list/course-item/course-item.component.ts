@@ -9,7 +9,7 @@ import {ICourse} from '../../../interfaces/icourse';
 export class CourseItemComponent implements OnInit {
 
   @Input() course: ICourse;
-  @Output() deleteCourse: EventEmitter<MouseEvent> = new EventEmitter();
+  @Output() deleteCourse: EventEmitter<ICourse> = new EventEmitter();
 
   constructor() { }
 
@@ -17,7 +17,7 @@ export class CourseItemComponent implements OnInit {
   }
 
   onClickDeleteCourse() {
-    this.deleteCourse.emit();
+    this.deleteCourse.emit(this.course);
   }
 
 }

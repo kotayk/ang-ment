@@ -28,8 +28,8 @@ export class CoursesListComponent implements
     ];
   }
 
-  onCourseDelete(event) {
-    console.log(`course number ${event.course.id} deleted`);
+  onCourseDelete(course: ICourse) {
+    console.log(`course number ${course.id} deleted`);
   }
 
   onLoadMoreCourses() {

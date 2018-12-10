@@ -8,8 +8,8 @@ import {ICourse} from '../../../interfaces/icourse';
   styleUrls: ['./course-items.component.scss']
 })
 export class CourseItemsComponent implements OnInit {
-  @Output() deleteCourse: EventEmitter<any> = new EventEmitter();
-  @Output() loadMore: EventEmitter<any> = new EventEmitter();
+  @Output() deleteCourse: EventEmitter<ICourse> = new EventEmitter();
+  @Output() loadMore: EventEmitter<void> = new EventEmitter();
 
   courses: ICourse[];
 
@@ -20,7 +20,7 @@ export class CourseItemsComponent implements OnInit {
   }
 
   onCourseDelete(course: ICourse) {
-    this.deleteCourse.emit({course});
+    this.deleteCourse.emit(course);
   }
   onLoadMoreClick() {
     this.loadMore.emit();
