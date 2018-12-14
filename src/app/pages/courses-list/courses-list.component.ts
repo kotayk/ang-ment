@@ -30,6 +30,7 @@ export class CoursesListComponent implements
 
   onCourseDelete(course: ICourse) {
     console.log(`course number ${course.id} deleted`);
+    return course.id;
   }
 
   onLoadMoreCourses() {
