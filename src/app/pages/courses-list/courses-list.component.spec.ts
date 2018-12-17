@@ -7,17 +7,16 @@ import {ICourse} from '../../interfaces/icourse';
 
 @Component({selector: 'app-breadcrumbs', template: ''})
 class BreadcrumbsComponent {
-  @Input() path: IBreadcrumb;
+  @Input() path: IBreadcrumb[];
 }
 
 @Component({selector: 'app-course-search', template: ''})
 class CourseSearchComponent {
-  @Input() path: IBreadcrumb;
 }
 
 @Component({selector: 'app-course-items', template: ''})
 class CourseItemsComponent {
-  @Input() path: IBreadcrumb;
+  @Input() courses: ICourse[];
 }
 
 describe('CoursesListComponent', () => {

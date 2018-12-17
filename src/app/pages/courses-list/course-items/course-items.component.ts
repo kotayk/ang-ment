@@ -1,5 +1,4 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
-import Courses from '../../../../mocks/courses';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {ICourse} from '../../../interfaces/icourse';
 
 @Component({
@@ -7,17 +6,12 @@ import {ICourse} from '../../../interfaces/icourse';
   templateUrl: './course-items.component.html',
   styleUrls: ['./course-items.component.scss']
 })
-export class CourseItemsComponent implements OnInit {
+export class CourseItemsComponent {
   @Output() deleteCourse: EventEmitter<ICourse> = new EventEmitter();
   @Output() loadMore: EventEmitter<void> = new EventEmitter();
-
-  courses: ICourse[];
+  @Input() courses: ICourse[];
 
   constructor() { }
-
-  ngOnInit() {
-    this.courses = Courses;
-  }
 
   onCourseDelete(course: ICourse) {
     this.deleteCourse.emit(course);

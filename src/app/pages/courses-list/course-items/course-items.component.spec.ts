@@ -1,24 +1,25 @@
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {CourseItemsComponent} from './course-items.component';
-import {Component, CUSTOM_ELEMENTS_SCHEMA, Input} from '@angular/core';
+import {Component, CUSTOM_ELEMENTS_SCHEMA, EventEmitter, Input, Output} from '@angular/core';
 import Courses from '../../../../mocks/courses';
 import {ICourse} from '../../../interfaces/icourse';
-// import {CourseItemComponent} from '../course-item/course-item.component';
+import {By} from '@angular/platform-browser';
 
 @Component({
-  //todo why do I need to put here "app-course-item" if I want to test its content
   template: `
-    <app-course-items (deleteCourse)="onCourseDelete($event)" (loadMore)="onLoadMoreCourses()"></app-course-items>`
+    <app-course-items [courses]="courses" (deleteCourse)="onCourseDelete($event)" (loadMore)="onLoadMoreCourses()"></app-course-items>`
 })
 class TestHostComponent {
-  courses: ICourse[];
-  //todo what do I need to declare here?
+  @Output() deleteCourse: EventEmitter<ICourse> = new EventEmitter();
+  courses: ICourse[] = Courses;
+  onCourseDelete() { }
 }
 
 /* test host testing example*/
 describe('CourseItemsComponent', () => {
   let component: TestHostComponent;
+  let courseItemsComponent: CourseItemsComponent;
   let fixture: ComponentFixture<TestHostComponent>;
 
   beforeEach(async(() => {
@@ -35,14 +36,34 @@ describe('CourseItemsComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(TestHostComponent);
     component = fixture.componentInstance;
-    const courses = Courses;
-    component.courses = courses;
+    courseItemsComponent = fixture.debugElement.query(By.directive(CourseItemsComponent)).componentInstance;
+    spyOn(courseItemsComponent.deleteCourse, 'emit').and.callThrough();
     fixture.detectChanges();
   });
 
   it('should create', () => {
-    //todo what do I test here
     expect(component).toBeTruthy();
+  });
+
+  it('Input() should contain proper courses', () => {
+    expect(component.courses).toBe(Courses);
+  });
+
+  it('should call onCourseDelete Output() with proper param', () => {
+    courseItemsComponent.onCourseDelete({
+      id: 1,
+      title: 'Video Course 1',
+      creationDate: '05.28.2018',
+      durationTime: '1h 28min',
+      description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto asperiores dolorum eius facere harum id laboriosam laudantium nam nulla odio officiis optio, perferendis quia quisquam quo repellat sit soluta veritatis.',
+    });
+    expect(courseItemsComponent.deleteCourse.emit).toHaveBeenCalledWith({
+      id: 1,
+      title: 'Video Course 1',
+      creationDate: '05.28.2018',
+      durationTime: '1h 28min',
+      description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto asperiores dolorum eius facere harum id laboriosam laudantium nam nulla odio officiis optio, perferendis quia quisquam quo repellat sit soluta veritatis.',
+    });
   });
 
 });
