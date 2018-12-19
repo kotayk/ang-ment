@@ -1,6 +1,12 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { UserLoginComponent } from './user-login.component';
+import {UserLoginComponent} from './user-login.component';
+import {Component} from '@angular/core';
+import {By} from '@angular/platform-browser';
+
+@Component({selector: 'app-button', template: ''})
+class ButtonComponent {
+}
 
 describe('UserLoginComponent', () => {
   let component: UserLoginComponent;
@@ -8,9 +14,12 @@ describe('UserLoginComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ UserLoginComponent ]
+      declarations: [
+        UserLoginComponent,
+        ButtonComponent,
+      ]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
@@ -21,5 +30,9 @@ describe('UserLoginComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+  it('should have appropriate title', () => {
+    const loginEl = fixture.debugElement.query(By.css('.user-login__title'));
+    expect(loginEl.nativeElement.textContent.trim()).toEqual('User login');
   });
 });

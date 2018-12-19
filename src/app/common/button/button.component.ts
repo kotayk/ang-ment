@@ -5,13 +5,14 @@ import {Component, Input, Output, OnInit, EventEmitter} from '@angular/core';
   templateUrl: './button.component.html',
   styleUrls: ['./button.component.scss']
 })
+
 export class ButtonComponent implements OnInit {
   @Input() title: string;
   @Input() icon: string;
   @Input() flexBlock: boolean;
-  @Output() buttonClick: EventEmitter<MouseEvent> = new EventEmitter();
+  @Output() buttonClick: EventEmitter<any> = new EventEmitter();
 
-  onButtonClick(event: MouseEvent) {
+  onButtonClick(event: any) {
     this.buttonClick.emit(event);
   }
 

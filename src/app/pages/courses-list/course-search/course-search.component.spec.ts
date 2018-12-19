@@ -1,6 +1,13 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { CourseSearchComponent } from './course-search.component';
+import {CourseSearchComponent} from './course-search.component';
+import {FormsModule} from '@angular/forms';
+import {Component} from '@angular/core';
+import {By} from '@angular/platform-browser';
+
+@Component({selector: 'app-button', template: ''})
+class ButtonComponent {
+}
 
 describe('CourseSearchComponent', () => {
   let component: CourseSearchComponent;
@@ -8,9 +15,13 @@ describe('CourseSearchComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CourseSearchComponent ]
+      imports: [FormsModule],
+      declarations: [
+        CourseSearchComponent,
+        ButtonComponent,
+      ]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
@@ -21,5 +32,17 @@ describe('CourseSearchComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should update searchQuery according to user input', async() => {
+    const testString = 'test';
+    const searchInput = fixture.debugElement.query(By.css('.course-search__input'));
+    fixture.detectChanges();
+    fixture.whenStable().then(() => {
+      searchInput.nativeElement.value = testString;
+      searchInput.nativeElement.dispatchEvent(new Event('input'));
+      expect(component.searchQuery).toEqual(testString);
+    });
+
   });
 });

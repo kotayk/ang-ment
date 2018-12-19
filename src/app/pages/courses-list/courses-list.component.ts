@@ -1,6 +1,7 @@
 import {Component, OnInit, OnChanges, DoCheck, AfterContentChecked, AfterViewChecked, AfterContentInit, AfterViewInit, OnDestroy} from '@angular/core';
 import {IBreadcrumb} from '../../interfaces/ibreadcrumb';
 import {ICourse} from '../../interfaces/icourse';
+import Courses from '../../../mocks/courses';
 
 @Component({
   selector: 'app-courses-list',
@@ -17,6 +18,7 @@ export class CoursesListComponent implements
   OnDestroy {
 
   breadcrumbsPath: IBreadcrumb[];
+  courses: ICourse[];
 
   constructor() {
   }
@@ -26,10 +28,12 @@ export class CoursesListComponent implements
     this.breadcrumbsPath = [
       {title: 'Courses', isClickable: false},
     ];
+    this.courses = Courses;
   }
 
   onCourseDelete(course: ICourse) {
     console.log(`course number ${course.id} deleted`);
+    return course.id;
   }
 
   onLoadMoreCourses() {
