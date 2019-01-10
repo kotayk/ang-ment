@@ -1,5 +1,3 @@
-import {stripSummaryForJitFileSuffix} from "@angular/compiler/src/aot/util";
-
 export default [
   {
     id: 1,

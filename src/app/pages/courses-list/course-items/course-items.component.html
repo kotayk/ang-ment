@@ -3,5 +3,6 @@
                    [course]="course"
                    (deleteCourse)="onCourseDelete(course)"
                    appFreshCourse></app-course-item>
-  <div class="course-items__more" (click)="onLoadMoreClick()">Load more</div>
+  <div *ngIf="courses.length" class="course-items__more" (click)="onLoadMoreClick()">Load more</div>
+  <div *ngIf="!courses.length" class="course-items__more course-items__more_no-courses">No courses available, feel free to add your own</div>
 </div>
