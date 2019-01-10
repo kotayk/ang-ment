@@ -4,6 +4,7 @@ export default [
     title: 'Video Course 1',
     creationDate: '2019-01-08',
     durationTime: '1h 28min',
+    topRated: false,
     description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto asperiores dolorum eius facere harum id laboriosam laudantium nam nulla odio officiis optio, perferendis quia quisquam quo repellat sit soluta veritatis.',
   },
   {
@@ -11,6 +12,7 @@ export default [
     title: 'Video Course 2',
     creationDate: '2019-02-14',
     durationTime: '1h 28min',
+    topRated: false,
     description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto asperiores dolorum eius facere harum id laboriosam laudantium nam nulla odio officiis optio, perferendis quia quisquam quo repellat sit soluta veritatis.',
   },
   {
@@ -18,6 +20,7 @@ export default [
     title: 'Video Course 3',
     creationDate: '2018-12-31',
     durationTime: '1h 28min',
+    topRated: true,
     description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto asperiores dolorum eius facere harum id laboriosam laudantium nam nulla odio officiis optio, perferendis quia quisquam quo repellat sit soluta veritatis.',
   },
   {
@@ -25,6 +28,7 @@ export default [
     title: 'Video Course 4',
     creationDate: '2018-03-15',
     durationTime: '1h 28min',
+    topRated: true,
     description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto asperiores dolorum eius facere harum id laboriosam laudantium nam nulla odio officiis optio, perferendis quia quisquam quo repellat sit soluta veritatis.',
   },
   {
@@ -32,6 +36,7 @@ export default [
     title: 'Video Course 5',
     creationDate: '2018-03-15',
     durationTime: '1h 28min',
+    topRated: false,
     description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto asperiores dolorum eius facere harum id laboriosam laudantium nam nulla odio officiis optio, perferendis quia quisquam quo repellat sit soluta veritatis.',
   },
   {
@@ -39,6 +44,7 @@ export default [
     title: 'Video Course 6',
     creationDate: '2018-03-15',
     durationTime: '1h 28min',
+    topRated: false,
     description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto asperiores dolorum eius facere harum id laboriosam laudantium nam nulla odio officiis optio, perferendis quia quisquam quo repellat sit soluta veritatis.',
   },
   {
@@ -46,6 +52,7 @@ export default [
     title: 'Video Course 7',
     creationDate: '2018-03-15',
     durationTime: '1h 28min',
+    topRated: false,
     description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto asperiores dolorum eius facere harum id laboriosam laudantium nam nulla odio officiis optio, perferendis quia quisquam quo repellat sit soluta veritatis.',
   }
 ]

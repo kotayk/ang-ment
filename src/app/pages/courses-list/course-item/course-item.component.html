@@ -5,6 +5,7 @@
         <div class="course-item__info-block course-item__title">
           {{course.title}}
         </div>
+        <div [ngClass]="{'course-item__top-rated_empty': !course.topRated, 'course-item__top-rated_filled': course.topRated}" class="course-item__top-rated"></div>
       </div>
       <div class="course-item__info-inner">
         <div class="course-item__info-block">
