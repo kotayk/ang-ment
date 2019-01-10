@@ -10,11 +10,12 @@ import { UserLoginComponent } from './user-login/user-login.component';
 import { FreshCourseDirective } from './directives/fresh-course.directive';
 import { CourseDurationPipe } from './pipes/course-duration.pipe';
 import { OrderByCreationDatePipe } from './pipes/order-by-creation-date.pipe';
+import { SearchCoursePipe } from './pipes/search-course.pipe';
 
 @NgModule({
-  declarations: [HeaderComponent, LogoComponent, LinkComponent, ButtonComponent, BreadcrumbsComponent, FooterComponent, UserLoginComponent, FreshCourseDirective, CourseDurationPipe, OrderByCreationDatePipe],
+  declarations: [HeaderComponent, LogoComponent, LinkComponent, ButtonComponent, BreadcrumbsComponent, FooterComponent, UserLoginComponent, FreshCourseDirective, CourseDurationPipe, OrderByCreationDatePipe, SearchCoursePipe],
   imports: [ngCommon],
-  exports: [HeaderComponent, LogoComponent, LinkComponent, ButtonComponent, BreadcrumbsComponent, FooterComponent, UserLoginComponent, FreshCourseDirective, CourseDurationPipe, OrderByCreationDatePipe],
+  exports: [HeaderComponent, LogoComponent, LinkComponent, ButtonComponent, BreadcrumbsComponent, FooterComponent, UserLoginComponent, FreshCourseDirective, CourseDurationPipe, OrderByCreationDatePipe, SearchCoursePipe],
 })
 export class CommonModule {
 }
