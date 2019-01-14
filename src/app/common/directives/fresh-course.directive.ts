@@ -1,17 +1,19 @@
-import {Directive, ElementRef, Host, OnInit} from '@angular/core';
+import {Directive, ElementRef, Host, Input, OnInit} from '@angular/core';
 import {CourseItemComponent} from '../../pages/courses-list/course-item/course-item.component';
+import {ICourse} from '../../interfaces/icourse';
 
 @Directive({
   selector: '[appFreshCourse]'
 })
 export class FreshCourseDirective implements OnInit {
+  @Input() course: ICourse;
   private element: ElementRef;
   private hostComponent: CourseItemComponent;
   private courseDate: number;
-  private delta: number;
+  private readonly delta: number;
   private now: number;
   private color: string;
-  private colors: object;
+  private readonly colors: object;
 
   constructor(Element: ElementRef, @Host() hostComponent: CourseItemComponent) {
     this.element = Element;
@@ -25,7 +27,7 @@ export class FreshCourseDirective implements OnInit {
   }
 
   ngOnInit() {
-    this.courseDate = new Date(this.hostComponent.course.creationDate).getTime();
+    this.courseDate = new Date(this.course.creationDate).getTime();
     this.now = new Date().getTime();
     this.color = this.setColor();
     if (this.color) {

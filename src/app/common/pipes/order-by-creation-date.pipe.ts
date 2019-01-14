@@ -8,7 +8,7 @@ export class OrderByCreationDatePipe implements PipeTransform {
 
   transform(array: Course[], args?: any): any {
     const asc = args ? args[0] : false;
-    const courseItems = array;
+    const courseItems = array.slice(0);
     courseItems.sort((a: any, b: any) => {
       const dateA = new Date(a.creationDate).getTime();
       const dateB = new Date(b.creationDate).getTime();
