@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 
 @Component({
   selector: 'app-course-search',
@@ -6,7 +6,7 @@ import {Component, OnInit} from '@angular/core';
   styleUrls: ['./course-search.component.scss']
 })
 export class CourseSearchComponent implements OnInit {
-
+  @Output() searchClick: EventEmitter<any> = new EventEmitter();
   searchQuery: string;
 
   constructor() {
@@ -16,7 +16,7 @@ export class CourseSearchComponent implements OnInit {
   }
 
   onClickSearch(event: MouseEvent) {
-    console.log(this.searchQuery);
+    this.searchClick.emit(this.searchQuery);
   }
 
 

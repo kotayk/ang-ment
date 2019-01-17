@@ -19,6 +19,7 @@ export class CoursesListComponent implements
 
   breadcrumbsPath: IBreadcrumb[];
   courses: ICourse[];
+  searchQuery: string;
 
   constructor() {
   }
@@ -29,6 +30,11 @@ export class CoursesListComponent implements
       {title: 'Courses', isClickable: false},
     ];
     this.courses = Courses;
+    this.searchQuery = '';
+  }
+
+  onSearchClick(query: string) {
+    this.searchQuery = query;
   }
 
   onCourseDelete(course: ICourse) {
