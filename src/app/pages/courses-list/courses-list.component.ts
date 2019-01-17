@@ -2,6 +2,7 @@ import {Component, OnInit, OnChanges, DoCheck, AfterContentChecked, AfterViewChe
 import {IBreadcrumb} from '../../interfaces/ibreadcrumb';
 import {ICourse} from '../../interfaces/icourse';
 import Courses from '../../../mocks/courses';
+import {CoursesService} from '../../common/services/courses.service';
 
 @Component({
   selector: 'app-courses-list',
@@ -21,7 +22,7 @@ export class CoursesListComponent implements
   courses: ICourse[];
   searchQuery: string;
 
-  constructor() {
+  constructor(private coursesService: CoursesService) {
   }
 
   ngOnInit() {
@@ -29,7 +30,7 @@ export class CoursesListComponent implements
     this.breadcrumbsPath = [
       {title: 'Courses', isClickable: false},
     ];
-    this.courses = Courses;
+    this.courses = this.coursesService.getList();
     this.searchQuery = '';
   }
 
@@ -38,8 +39,10 @@ export class CoursesListComponent implements
   }
 
   onCourseDelete(course: ICourse) {
-    console.log(`course number ${course.id} deleted`);
-    return course.id;
+    if (confirm(`You sure yo delete course "${course.title}"?`)) {
+      this.coursesService.removeItem(course.id);
+      this.courses = this.coursesService.getList();
+    }
   }
 
   onLoadMoreCourses() {
