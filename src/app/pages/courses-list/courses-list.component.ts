@@ -1,7 +1,6 @@
 import {Component, OnInit, OnChanges, DoCheck, AfterContentChecked, AfterViewChecked, AfterContentInit, AfterViewInit, OnDestroy} from '@angular/core';
 import {IBreadcrumb} from '../../interfaces/ibreadcrumb';
 import {ICourse} from '../../interfaces/icourse';
-import Courses from '../../../mocks/courses';
 import {CoursesService} from '../../common/services/courses.service';
 
 @Component({
@@ -23,6 +22,7 @@ export class CoursesListComponent implements
   searchQuery: string;
 
   constructor(private coursesService: CoursesService) {
+    this.coursesService = coursesService;
   }
 
   ngOnInit() {

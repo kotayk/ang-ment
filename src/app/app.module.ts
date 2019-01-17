@@ -5,6 +5,7 @@ import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {CommonModule} from './common/common.module';
 import {CoursesListModule} from './pages/courses-list/courses-list.module';
+import {LoginModule} from './pages/login/login.module';
 
 @NgModule({
   declarations: [
@@ -15,6 +16,7 @@ import {CoursesListModule} from './pages/courses-list/courses-list.module';
     AppRoutingModule,
     CommonModule,
     CoursesListModule,
+    LoginModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
