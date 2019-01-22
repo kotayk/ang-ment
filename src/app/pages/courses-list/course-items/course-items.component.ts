@@ -12,7 +12,7 @@ export class CourseItemsComponent implements OnChanges {
   @Output() loadMore: EventEmitter<void> = new EventEmitter();
   @Input() courses: ICourse[];
   @Input() searchQuery: string;
-  private courseList: ICourse[];
+  courseList: ICourse[];
 
   constructor() {
     this.courseList = this.courses;
@@ -21,6 +21,9 @@ export class CourseItemsComponent implements OnChanges {
   ngOnChanges(changes) {
     if (changes.searchQuery) {
       this.courseList = new SearchCoursePipe().transform(this.courses, changes.searchQuery.currentValue);
+    }
+    if (changes.courses) {
+      this.courseList = changes.courses.currentValue;
     }
   }
 
