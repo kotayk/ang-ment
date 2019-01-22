@@ -1,5 +1,5 @@
 <div class="header">
   <app-header-logo></app-header-logo>
-  <app-user-login *ngIf="!isLoginPage" (logoutClick)="logout()" [userData]="userData"></app-user-login>
+  <app-user-login *ngIf="!hideLogin" (logoutClick)="logout()" [userData]="userData"></app-user-login>
 </div>
 

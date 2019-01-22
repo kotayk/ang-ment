@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {AuthService} from '../services/auth.service';
 import {ActivatedRoute, Router} from '@angular/router';
 
@@ -8,10 +8,11 @@ import {ActivatedRoute, Router} from '@angular/router';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
+  @Input() hideLogin: boolean;
   userData: object;
-  isLoginPage: boolean;
 
-  constructor(private authService: AuthService, private router: Router, private route: ActivatedRoute) {
+  constructor(private authService: AuthService, private router: Router) {
+
   }
 
   ngOnInit() {

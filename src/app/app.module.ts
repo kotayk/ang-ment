@@ -6,10 +6,12 @@ import {AppComponent} from './app.component';
 import {CommonModule} from './common/common.module';
 import {CoursesListModule} from './pages/courses-list/courses-list.module';
 import {LoginModule} from './pages/login/login.module';
+import {BaseLayoutComponent} from './pages/base-layout/base-layout.component';
 
 @NgModule({
   declarations: [
     AppComponent,
+    BaseLayoutComponent,
   ],
   imports: [
     BrowserModule,
