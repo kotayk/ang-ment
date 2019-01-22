@@ -21,9 +21,7 @@ export class CoursesListComponent implements
   courses: ICourse[];
   searchQuery: string;
 
-  constructor(private coursesService: CoursesService) {
-    this.coursesService = coursesService;
-  }
+  constructor(private coursesService: CoursesService) {}
 
   ngOnInit() {
     console.log('on init')

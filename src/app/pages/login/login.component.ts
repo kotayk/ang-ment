@@ -19,8 +19,6 @@ export class LoginComponent implements OnInit {
       firstName: 'Ilia',
       lastName: 'Fedorov',
     };
-    this.router = router;
-    this.authService = authService;
   }
 
   ngOnInit() {

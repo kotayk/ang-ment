@@ -12,14 +12,10 @@ export class HeaderComponent implements OnInit {
   isLoginPage: boolean;
 
   constructor(private authService: AuthService, private router: Router, private route: ActivatedRoute) {
-    this.authService = authService;
   }
 
   ngOnInit() {
     this.userData = this.authService.getUserInfo();
-
-    // console.log(this.router.url)
-    // this.isLoginPage = (this.router.url === '/login');
   }
 
   logout() {
