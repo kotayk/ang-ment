@@ -1,0 +1,12 @@
+.app-wrapper {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+.app-content {
+  flex: 1 0 auto;
+  position: relative;
+}
+.app-footer {
+  flex-shrink: 0;
+}
