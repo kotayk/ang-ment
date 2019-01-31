@@ -16,5 +16,14 @@ $loadMoreButtonColor: #f1f1f1;
     &:active {
       background-color: darken($loadMoreButtonColor, 15%);
     }
+    &_no-courses {
+      cursor: default;
+      &:hover {
+        background-color: $loadMoreButtonColor;
+      }
+      &:active {
+        background-color: $loadMoreButtonColor;
+      }
+    }
   }
 }

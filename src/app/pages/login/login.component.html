@@ -1,0 +1,38 @@
+<div class="app-wrapper">
+  <div class="app-header">
+    <app-header [hideLogin]="true"></app-header>
+  </div>
+  <div class="app-content">
+    <div class="login-wrapper">
+      <div class="login-dialog">
+        <div class="login-dialog__header">
+          <div class="login-dialog__title">
+            Login
+          </div>
+        </div>
+        <div class="login-dialog__content">
+          <div class="login-dialog__form">
+            <div class="login-dialog__input-container">
+              <div class="login-dialog__input-name">Email:</div>
+              <input type="text" name="email" placeholder="Please enter your email" class="login-dialog__input"
+                     [(ngModel)]="email">
+            </div>
+            <div class="login-dialog__input-container">
+              <div class="login-dialog__input-name">Password:</div>
+              <input type="password" name="password" placeholder="Please enter your password"
+                     class="login-dialog__input"
+                     [(ngModel)]="password">
+            </div>
+            <div class="login-dialog__button">
+              <app-button (buttonClick)="onLoginClick()" title="Login"></app-button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="app-footer">
+    <app-footer></app-footer>
+  </div>
+</div>
+

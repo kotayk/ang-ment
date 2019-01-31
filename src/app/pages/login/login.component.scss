@@ -1,0 +1,41 @@
+.login-wrapper {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.login-dialog {
+  border: 2px solid #a9a9a9;
+  padding-left: 3px;
+  &__title {
+    font-size: 18px;
+    border-bottom: 2px solid #a9a9a9;
+    padding: 5px 0;
+  }
+  &__content {
+    padding: 40px 80px;
+  }
+  &__input-container {
+    margin-bottom: 10px;
+  }
+  &__input {
+    width: 200px;
+    height: 20px;
+  }
+}
+
+.app-wrapper {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+.app-content {
+  flex: 1 0 auto;
+  position: relative;
+}
+.app-footer {
+  flex-shrink: 0;
+}

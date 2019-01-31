@@ -1,7 +1,7 @@
 import {Component, OnInit, OnChanges, DoCheck, AfterContentChecked, AfterViewChecked, AfterContentInit, AfterViewInit, OnDestroy} from '@angular/core';
 import {IBreadcrumb} from '../../interfaces/ibreadcrumb';
 import {ICourse} from '../../interfaces/icourse';
-import Courses from '../../../mocks/courses';
+import {CoursesService} from '../../common/services/courses.service';
 
 @Component({
   selector: 'app-courses-list',
@@ -19,21 +19,28 @@ export class CoursesListComponent implements
 
   breadcrumbsPath: IBreadcrumb[];
   courses: ICourse[];
+  searchQuery: string;
 
-  constructor() {
-  }
+  constructor(private coursesService: CoursesService) {}
 
   ngOnInit() {
     console.log('on init')
     this.breadcrumbsPath = [
       {title: 'Courses', isClickable: false},
     ];
-    this.courses = Courses;
+    this.courses = this.coursesService.getList();
+    this.searchQuery = '';
+  }
+
+  onSearchClick(query: string) {
+    this.searchQuery = query;
   }
 
   onCourseDelete(course: ICourse) {
-    console.log(`course number ${course.id} deleted`);
-    return course.id;
+    if (confirm(`You sure yo delete course "${course.title}"?`)) {
+      this.coursesService.removeItem(course.id);
+      this.courses = this.coursesService.getList();
+    }
   }
 
   onLoadMoreCourses() {

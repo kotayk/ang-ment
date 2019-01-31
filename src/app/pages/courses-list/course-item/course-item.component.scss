@@ -1,7 +1,6 @@
 .course-item {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
   align-content: center;
   border: 1px solid #a9a9a9;
   padding: 10px;
@@ -10,6 +9,19 @@
     display: flex;
     justify-content: space-between;
     margin-bottom: 10px;
+  }
+
+  &__top-rated {
+    width: 16px;
+    height: 16px;
+    &_empty {
+      background: url(/assets/img/star-empty.png) no-repeat 0 0;
+      background-size: contain;
+    }
+    &_filled {
+      background: url(/assets/img/star-filled.png) no-repeat 0 0;
+      background-size: contain;
+    }
   }
 
   &__container {
