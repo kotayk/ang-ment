@@ -1,4 +1,5 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-course-search',
@@ -9,7 +10,7 @@ export class CourseSearchComponent implements OnInit {
   @Output() searchClick: EventEmitter<any> = new EventEmitter();
   searchQuery: string;
 
-  constructor() {
+  constructor(private router: Router) {
   }
 
   ngOnInit() {
@@ -17,6 +18,10 @@ export class CourseSearchComponent implements OnInit {
 
   onClickSearch(event: MouseEvent) {
     this.searchClick.emit(this.searchQuery);
+  }
+
+  onClickAdd(event: MouseEvent) {
+    this.router.navigate(['/courses/new']);
   }
 
 

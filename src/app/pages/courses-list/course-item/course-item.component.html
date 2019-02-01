@@ -22,10 +22,10 @@
   </div>
   <div class="course-item__controls">
     <div class="course-item__button">
-      <app-button flexBlock="true" title="Edit" icon="assets/img/edit.png"></app-button>
+      <app-button (buttonClick)="onClickEdit($event)" flexBlock="true" title="Edit" icon="assets/img/edit.png"></app-button>
     </div>
     <div class="course-item__button">
-      <app-button (buttonClick)="onClickDeleteCourse()" flexBlock="true" title="Delete" icon="assets/img/delete.png"></app-button>
+      <app-button (buttonClick)="onClickDeleteCourse($event)" flexBlock="true" title="Delete" icon="assets/img/delete.png"></app-button>
     </div>
   </div>
 </div>

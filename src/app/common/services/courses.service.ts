@@ -74,7 +74,7 @@ export class CoursesService {
 
   createCourse() {}
 
-  getItemById (id) {
+  getItemById (id): ICourse {
     return this.courses.find(course => +course.id === +id );
   }
 
