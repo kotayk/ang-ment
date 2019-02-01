@@ -5,12 +5,14 @@ import {LoginComponent} from './pages/login/login.component';
 import {BaseLayoutComponent} from './pages/base-layout/base-layout.component';
 import {CourseAddComponent} from './pages/course-add/course-add.component';
 import {NotFoundComponent} from './pages/not-found/not-found.component';
+import {AuthGuard} from './guards/auth.guard';
 
 const routes: Routes = [
   {path: 'login', component: LoginComponent},
   {
     path: '',
     component: BaseLayoutComponent,
+    canActivate: [AuthGuard],
     children: [
       {path: 'courses', component: CoursesListComponent},
       {path: 'courses/:id', component: CourseAddComponent},
