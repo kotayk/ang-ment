@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ICourse} from '../../interfaces/icourse';
 import {CoursesService} from '../../common/services/courses.service';
@@ -20,41 +20,38 @@ export class CourseAddComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.course = {} as ICourse;
-    this.route.params.subscribe( params => {
-      this.courseID = params['id'];
-      if (this.courseID !== 'new') {
-        this.course = this.coursesService.getItemById(this.courseID);
-        this.breadcrumbsPath = [
-          {
-            title: 'Courses',
-            isClickable: true,
-            url: '/courses'
-          },
-          {
-            title: this.course.title,
-            isClickable: false,
-          },
-        ];
-      } else {
-        this.breadcrumbsPath = [
-          {
-            title: 'Courses',
-            isClickable: true,
-            url: '/courses'
-          },
-          {
-            title: 'New course',
-            isClickable: false,
-          },
-        ];
+    this.route.data
+      .subscribe((data: { course: ICourse }) => {
+        this.course = data.course;
+        this.breadcrumbsPath = this.initializeBreadcrumbs();
+      });
+  }
+
+  initializeBreadcrumbs() {
+    const breadcrumbs: IBreadcrumb[] = [
+      {
+        title: 'Courses',
+        isClickable: true,
+        url: '/courses'
       }
-    });
+    ];
+    if (this.course.title) {
+      breadcrumbs.push({
+        title: this.course.title,
+        isClickable: false,
+      });
+    } else {
+      breadcrumbs.push({
+        title: 'New course',
+        isClickable: false,
+      });
+    }
 
-
+    return breadcrumbs;
   }
 
   save() {
+    this.coursesService.createCourse();
     this.router.navigate(['/courses/']);
   }
 

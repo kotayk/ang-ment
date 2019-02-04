@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import {ICourse} from '../../interfaces/icourse';
+import {Observable} from 'rxjs';
+
 
 @Injectable({
   providedIn: 'root'
@@ -72,9 +74,11 @@ export class CoursesService {
     return this.courses;
   }
 
-  createCourse() {}
+  createCourse() {
+    console.log('save');
+  }
 
-  getItemById (id): ICourse {
+  getItemById (id) {
     return this.courses.find(course => +course.id === +id );
   }
 

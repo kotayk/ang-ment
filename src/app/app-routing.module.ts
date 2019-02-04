@@ -6,6 +6,7 @@ import {BaseLayoutComponent} from './pages/base-layout/base-layout.component';
 import {CourseAddComponent} from './pages/course-add/course-add.component';
 import {NotFoundComponent} from './pages/not-found/not-found.component';
 import {AuthGuard} from './guards/auth.guard';
+import {CourseDetailsResolverService} from './pages/course-add/course-details-resolver.service';
 
 const routes: Routes = [
   {path: 'login', component: LoginComponent},
@@ -15,8 +16,20 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     children: [
       {path: 'courses', component: CoursesListComponent},
-      {path: 'courses/:id', component: CourseAddComponent},
-      {path: 'courses/new', component: CourseAddComponent},
+      {
+        path: 'courses/:id',
+        component: CourseAddComponent,
+        resolve: {
+          course: CourseDetailsResolverService
+        }
+      },
+      {
+        path: 'courses/new',
+        component: CourseAddComponent,
+        resolve: {
+          course: CourseDetailsResolverService
+        }
+      },
     ]
   },
   {path: '', redirectTo: '/courses', pathMatch: 'full'},
