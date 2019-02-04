@@ -12,15 +12,7 @@ export class CourseDetailsResolverService implements Resolve<ICourse> {
 
   resolve(route: ActivatedRouteSnapshot) {
     const id = route.paramMap.get('id');
-    const course = this.initializeCourse(id);
-
-    return course;
+    return this.coursesService.getItemById(id);
   }
 
-  initializeCourse(id) {
-    if (id !== 'new') {
-      return this.coursesService.getItemById(id);
-    }
-    return {} as ICourse;
-  }
 }

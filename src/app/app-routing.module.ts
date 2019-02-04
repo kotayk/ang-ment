@@ -26,9 +26,6 @@ const routes: Routes = [
       {
         path: 'courses/new',
         component: CourseAddComponent,
-        resolve: {
-          course: CourseDetailsResolverService
-        }
       },
     ]
   },

@@ -22,7 +22,7 @@ export class CourseAddComponent implements OnInit {
   ngOnInit() {
     this.route.data
       .subscribe((data: { course: ICourse }) => {
-        this.course = data.course;
+        this.course = data.course ? data.course : {} as ICourse;
         this.breadcrumbsPath = this.initializeBreadcrumbs();
       });
   }
