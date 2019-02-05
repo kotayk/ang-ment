@@ -1,5 +1,6 @@
 import {ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {ICourse} from '../../../interfaces/icourse';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-course-item',
@@ -12,12 +13,16 @@ export class CourseItemComponent implements OnInit {
   @Input() course: ICourse;
   @Output() deleteCourse: EventEmitter<ICourse> = new EventEmitter();
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit() {
   }
 
-  onClickDeleteCourse() {
+  onClickEdit(event: MouseEvent) {
+    this.router.navigate(['/courses/', this.course.id]);
+  }
+
+  onClickDeleteCourse(event: MouseEvent) {
     this.deleteCourse.emit(this.course);
   }
 

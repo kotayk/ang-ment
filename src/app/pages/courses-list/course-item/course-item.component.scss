@@ -24,6 +24,10 @@
     }
   }
 
+  &__container {
+    flex-grow: 1;
+  }
+
   &__info-inner {
     display: flex;
   }

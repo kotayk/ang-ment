@@ -4,19 +4,33 @@ import {CoursesListComponent} from './pages/courses-list/courses-list.component'
 import {LoginComponent} from './pages/login/login.component';
 import {BaseLayoutComponent} from './pages/base-layout/base-layout.component';
 import {CourseAddComponent} from './pages/course-add/course-add.component';
+import {NotFoundComponent} from './pages/not-found/not-found.component';
+import {AuthGuard} from './guards/auth.guard';
+import {CourseDetailsResolverService} from './pages/course-add/course-details-resolver.service';
 
 const routes: Routes = [
   {path: 'login', component: LoginComponent},
   {
     path: '',
     component: BaseLayoutComponent,
+    canActivate: [AuthGuard],
     children: [
-      {path: 'courses-list', component: CoursesListComponent},
-      {path: 'course-add', component: CourseAddComponent},
+      {path: 'courses', component: CoursesListComponent},
+      {
+        path: 'courses/:id',
+        component: CourseAddComponent,
+        resolve: {
+          course: CourseDetailsResolverService
+        }
+      },
+      {
+        path: 'courses/new',
+        component: CourseAddComponent,
+      },
     ]
   },
-  {path: '', redirectTo: '/courses-list', pathMatch: 'full'},
-  {path: '**', redirectTo: '/courses-list'},
+  {path: '', redirectTo: '/courses', pathMatch: 'full'},
+  {path: '**', component: NotFoundComponent},
 ];
 
 @NgModule({
