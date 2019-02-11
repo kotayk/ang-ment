@@ -35,9 +35,9 @@ export class CourseAddComponent implements OnInit {
         url: '/courses'
       }
     ];
-    if (this.course.title) {
+    if (this.course.name) {
       breadcrumbs.push({
-        title: this.course.title,
+        title: this.course.name,
         isClickable: false,
       });
     } else {

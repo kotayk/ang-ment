@@ -15,8 +15,7 @@ export class CourseItemComponent implements OnInit {
 
   constructor(private router: Router) { }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   onClickEdit(event: MouseEvent) {
     this.router.navigate(['/courses/', this.course.id]);

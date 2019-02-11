@@ -8,14 +8,7 @@ import {CoursesService} from '../../common/services/courses.service';
   templateUrl: './courses-list.component.html',
   styleUrls: ['./courses-list.component.scss']
 })
-export class CoursesListComponent implements
-  OnInit,
-  OnChanges,
-  DoCheck,
-  AfterViewInit,
-  AfterContentInit,
-  AfterViewChecked, AfterContentChecked,
-  OnDestroy {
+export class CoursesListComponent implements OnInit {
 
   breadcrumbsPath: IBreadcrumb[];
   courses: ICourse[];
@@ -24,11 +17,13 @@ export class CoursesListComponent implements
   constructor(private coursesService: CoursesService) {}
 
   ngOnInit() {
-    console.log('on init')
     this.breadcrumbsPath = [
       {title: 'Courses', isClickable: false},
     ];
-    this.courses = this.coursesService.getList();
+    this.courses = [];
+    this.coursesService.getList().subscribe((courses) => {
+      this.courses = courses;
+    });
     this.searchQuery = '';
   }
 
@@ -37,42 +32,12 @@ export class CoursesListComponent implements
   }
 
   onCourseDelete(course: ICourse) {
-    if (confirm(`You sure yo delete course "${course.title}"?`)) {
+    if (confirm(`You sure yo delete course "${course.name}"?`)) {
       this.coursesService.removeItem(course.id);
-      this.courses = this.coursesService.getList();
+      this.coursesService.getList().subscribe((courses) => {
+        this.courses = courses;
+      });
     }
-  }
-
-  onLoadMoreCourses() {
-    console.log('load more courses');
-  }
-
-  ngOnChanges() {
-    console.log('on changes');
-  }
-
-  ngDoCheck() {
-    console.log('do check');
-  }
-
-  ngAfterContentInit() {
-    console.log('after content init');
-  }
-
-  ngAfterContentChecked() {
-    console.log('after content checked');
-  }
-
-  ngAfterViewInit() {
-    console.log('after view init');
-  }
-
-  ngAfterViewChecked() {
-    console.log('after view checked');
-  }
-
-  ngOnDestroy() {
-    console.log('on destroy');
   }
 
 }

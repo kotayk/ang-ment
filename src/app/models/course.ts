@@ -2,9 +2,10 @@ import {ICourse} from '../interfaces/icourse';
 
 export class Course implements ICourse {
   id: number;
-  title: string;
-  creationDate: string;
+  name: string;
+  data: string;
+  date: string;
   durationTime: string;
-  topRated: boolean;
+  isTopRated: boolean;
   description: string;
 }

@@ -1,8 +1,8 @@
 export interface ICourse {
+  name: string;
   id: number;
-  title: string;
-  creationDate: string;
+  date: string;
   durationTime: string;
-  topRated: boolean;
+  isTopRated: boolean;
   description: string;
 }
