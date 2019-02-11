@@ -21,7 +21,7 @@ export class CoursesListComponent implements OnInit {
 
   ngOnInit() {
     this.page = 0;
-    this.PAGE_SIZE = 14;
+    this.PAGE_SIZE = 10;
     this.moreAvailable = true;
     this.breadcrumbsPath = [
       {title: 'Courses', isClickable: false},
@@ -42,11 +42,19 @@ export class CoursesListComponent implements OnInit {
   }
   onSearchClick(query: string) {
     this.searchQuery = query;
+    this.page = 0;
+    this.moreAvailable = true;
+    this.coursesService.getList(this.getPage(this.page), this.searchQuery).subscribe((response) => {
+      this.courses = response;
+      if (!response.length) {
+        this.moreAvailable = false;
+      }
+    });
   }
 
   onLoadMoreCourses() {
     this.page++;
-    this.coursesService.getList(this.getPage(this.page)).subscribe((response) => {
+    this.coursesService.getList(this.getPage(this.page), this.searchQuery).subscribe((response) => {
       this.courses = [...this.courses, ...response];
       if (!response.length) {
         this.moreAvailable = false;
