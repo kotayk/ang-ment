@@ -16,7 +16,11 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.userData = this.authService.getUserInfo();
+    this.userData = {};
+    this.authService.getUserInfo()
+      .subscribe((response) => {
+          this.userData = response;
+        });
   }
 
   logout() {

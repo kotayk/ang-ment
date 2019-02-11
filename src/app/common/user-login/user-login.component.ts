@@ -1,23 +1,27 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {IUser} from '../../interfaces/iuser';
-import {ICourse} from '../../interfaces/icourse';
+import {Component, EventEmitter, Input, OnChanges, OnInit, Output} from '@angular/core';
 
 @Component({
   selector: 'app-user-login',
   templateUrl: './user-login.component.html',
   styleUrls: ['./user-login.component.scss']
 })
-export class UserLoginComponent implements OnInit {
-  @Input() userData: {isAuthenticated, user};
+export class UserLoginComponent implements OnInit, OnChanges {
+  @Input() userData: any;
   @Output() logoutClick: EventEmitter<any> = new EventEmitter();
-  user: IUser;
+  firstName: string;
+  lastName: string;
   isAuthenticated: boolean;
 
   constructor() { }
 
-  ngOnInit() {
-    this.user = this.userData.user;
-    this.isAuthenticated = this.userData.isAuthenticated;
+  ngOnInit() {}
+
+  ngOnChanges(change) {
+    if (change.userData && Object.keys(change.userData.currentValue).length) {
+      this.firstName = change.userData.currentValue.name.first;
+      this.lastName = change.userData.currentValue.name.last;
+      this.isAuthenticated = true;
+    }
   }
 
   onLogoutClick() {

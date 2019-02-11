@@ -3,7 +3,7 @@
     User login
   </div>
   <div *ngIf="isAuthenticated" class="user-login__title">
-    Hi, {{user.firstName}} {{user.lastName}}
+    Hi, {{firstName}} {{lastName}}
   </div>
   <app-button *ngIf="isAuthenticated" (buttonClick)="onLogoutClick()" title="Log off"></app-button>
 </div>

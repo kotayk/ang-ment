@@ -9,24 +9,20 @@ import {ActivatedRoute, Router} from '@angular/router';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-  user: IUser;
-  email: string;
+  login: string;
   password: string;
 
-  constructor(private authService: AuthService, private router: Router) {
-    this.user = {
-      id: 1,
-      firstName: 'Ilia',
-      lastName: 'Fedorov',
-    };
-  }
+  constructor(private authService: AuthService, private router: Router) {}
 
   ngOnInit() {
   }
 
   onLoginClick() {
-    this.authService.login(this.user);
-    this.router.navigateByUrl('/courses');
+    this.authService.login({login: this.login, password: this.password})
+      .subscribe((response) => {
+        this.authService.setToken(response.token);
+        this.router.navigateByUrl('/courses');
+      });
   }
 
 }
