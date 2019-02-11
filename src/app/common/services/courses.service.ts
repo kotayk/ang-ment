@@ -35,7 +35,7 @@ export class CoursesService {
   updateItem() {}
 
   removeItem(id) {
-    this.courses = this.courses.filter(course => course.id !== id);
+    return this.http.delete<ICourse[]>(`http://localhost:3004/courses/${id}`);
   }
 
 }

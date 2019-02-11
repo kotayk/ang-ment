@@ -34,9 +34,8 @@ export class CoursesListComponent implements OnInit {
   }
 
   getPage(pageNumber) {
-    const start = pageNumber === 0 ? 1 : pageNumber * this.PAGE_SIZE;
     return {
-      start,
+      start: pageNumber * this.PAGE_SIZE,
       count: this.PAGE_SIZE,
     };
   }
@@ -64,9 +63,10 @@ export class CoursesListComponent implements OnInit {
 
   onCourseDelete(course: ICourse) {
     if (confirm(`You sure yo delete course "${course.name}"?`)) {
-      this.coursesService.removeItem(course.id);
-      this.coursesService.getList().subscribe((courses) => {
-        this.courses = courses;
+      this.coursesService.removeItem(course.id).subscribe((response) => {
+        this.coursesService.getList({start: 0, count: (this.page + 1) * this.PAGE_SIZE}, this.searchQuery).subscribe((courses) => {
+          this.courses = courses;
+        });
       });
     }
   }
