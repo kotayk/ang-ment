@@ -24,18 +24,20 @@ export class CoursesService {
     return this.http.get<ICourse[]>('http://localhost:3004/courses', {params});
   }
 
-  createCourse() {
-    console.log('save');
-  }
-
   getItemById(id): Observable<ICourse> {
     return this.http.get<ICourse>(`http://localhost:3004/courses/${id}`);
   }
 
-  updateItem() {}
+  updateItem(course): Observable<ICourse> {
+    return this.http.patch<ICourse>(`http://localhost:3004/courses/${course.id}`, course);
+  }
 
-  removeItem(id) {
-    return this.http.delete<ICourse[]>(`http://localhost:3004/courses/${id}`);
+  removeItem(id): Observable<ICourse> {
+    return this.http.delete<ICourse>(`http://localhost:3004/courses/${id}`);
+  }
+
+  createCourse(course): Observable<ICourse> {
+    return this.http.post<ICourse>(`http://localhost:3004/courses/`, course);
   }
 
 }

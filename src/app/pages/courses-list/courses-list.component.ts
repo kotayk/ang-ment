@@ -1,4 +1,4 @@
-import {Component, OnInit, OnChanges, DoCheck, AfterContentChecked, AfterViewChecked, AfterContentInit, AfterViewInit, OnDestroy} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {IBreadcrumb} from '../../interfaces/ibreadcrumb';
 import {ICourse} from '../../interfaces/icourse';
 import {CoursesService} from '../../common/services/courses.service';
@@ -39,6 +39,7 @@ export class CoursesListComponent implements OnInit {
       count: this.PAGE_SIZE,
     };
   }
+
   onSearchClick(query: string) {
     this.searchQuery = query;
     this.page = 0;
@@ -63,7 +64,7 @@ export class CoursesListComponent implements OnInit {
 
   onCourseDelete(course: ICourse) {
     if (confirm(`You sure yo delete course "${course.name}"?`)) {
-      this.coursesService.removeItem(course.id).subscribe((response) => {
+      this.coursesService.removeItem(course.id).subscribe(() => {
         this.coursesService.getList({start: 0, count: (this.page + 1) * this.PAGE_SIZE}, this.searchQuery).subscribe((courses) => {
           this.courses = courses;
         });

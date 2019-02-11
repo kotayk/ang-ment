@@ -15,21 +15,23 @@ const routes: Routes = [
     component: BaseLayoutComponent,
     canActivate: [AuthGuard],
     children: [
-      {path: 'courses', component: CoursesListComponent},
+      {path: 'courses', component: CoursesListComponent, pathMatch: 'full'},
+      {
+        path: 'courses/new',
+        component: CourseAddComponent,
+        pathMatch: 'full'
+      },
       {
         path: 'courses/:id',
         component: CourseAddComponent,
         resolve: {
           course: CourseDetailsResolverService
-        }
+        },
+        pathMatch: 'full'
       },
-      {
-        path: 'courses/new',
-        component: CourseAddComponent,
-      },
+      {path: '', redirectTo: '/courses', pathMatch: 'full'},
     ]
   },
-  {path: '', redirectTo: '/courses', pathMatch: 'full'},
   {path: '**', component: NotFoundComponent},
 ];
 

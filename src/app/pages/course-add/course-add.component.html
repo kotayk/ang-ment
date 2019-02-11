@@ -1,9 +1,9 @@
 <app-breadcrumbs [path]="breadcrumbsPath"></app-breadcrumbs>
 <div class="course-add">
-  <div class="course-add-form">
+  <form class="course-add-form">
     <div class="course-add-form__field">
       <div class="course-add-form__label">Title:</div>
-      <input [(ngModel)]="course.name" type="text" class="course-add-form__input course-add-form__input_full-width">
+      <input [(ngModel)]="course.name" name="name" type="text" class="course-add-form__input course-add-form__input_full-width">
     </div>
     <div class="course-add-form__field">
       <div class="course-add-form__label">Description:</div>
@@ -11,12 +11,12 @@
     </div>
     <div class="course-add-form__field">
       <div class="course-add-form__label">Date:</div>
-      <input [ngModel]="course.date | date:'yyyy-MM-dd'" (ngModelChange)="course.date=$event" type="date" class="course-add-form__input">
+      <input [ngModel]="course.date | date:'yyyy-MM-dd'" (ngModelChange)="course.date=$event" type="date" name="date" class="course-add-form__input">
     </div>
     <div class="course-add-form__field">
       <div class="course-add-form__label">Duration:</div>
       <div class="course-add-form__field-box">
-        <input [(ngModel)]="course.durationTime" type="number" class="course-add-form__input">
+        <input name="durationTime" [(ngModel)]="course.durationTime" type="number" class="course-add-form__input">
         <div class="course-add-form__duration">{{course.durationTime | courseDuration}}</div>
       </div>
     </div>
@@ -32,5 +32,5 @@
         <app-button (buttonClick)="cancel($event)" title="Cancel"></app-button>
       </div>
     </div>
-  </div>
+  </form>
 </div>

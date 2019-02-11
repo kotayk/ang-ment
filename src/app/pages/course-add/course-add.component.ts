@@ -11,7 +11,7 @@ import {IBreadcrumb} from '../../interfaces/ibreadcrumb';
 })
 export class CourseAddComponent implements OnInit {
   course: ICourse;
-  courseID: string;
+  courseCreation: boolean;
   breadcrumbsPath: IBreadcrumb[];
 
   constructor(private route: ActivatedRoute,
@@ -20,9 +20,11 @@ export class CourseAddComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.courseCreation = true;
     this.route.data
       .subscribe((data: { course: ICourse }) => {
         this.course = data.course ? data.course : {} as ICourse;
+        this.courseCreation = !data.course;
         this.breadcrumbsPath = this.initializeBreadcrumbs();
       });
   }
@@ -35,7 +37,7 @@ export class CourseAddComponent implements OnInit {
         url: '/courses'
       }
     ];
-    if (this.course.name) {
+    if (!this.courseCreation) {
       breadcrumbs.push({
         title: this.course.name,
         isClickable: false,
@@ -51,8 +53,15 @@ export class CourseAddComponent implements OnInit {
   }
 
   save() {
-    this.coursesService.createCourse();
-    this.router.navigate(['/courses/']);
+    if (this.courseCreation) {
+      this.coursesService.createCourse(this.course).subscribe(() => {
+        this.router.navigate(['/courses/']);
+      });
+    } else {
+      this.coursesService.updateItem(this.course).subscribe(() => {
+        this.router.navigate(['/courses/']);
+      });
+    }
   }
 
   cancel() {
