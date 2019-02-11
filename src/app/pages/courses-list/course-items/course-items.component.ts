@@ -12,6 +12,7 @@ export class CourseItemsComponent implements OnChanges {
   @Output() loadMore: EventEmitter<void> = new EventEmitter();
   @Input() courses: ICourse[];
   @Input() searchQuery: string;
+  @Input() moreAvailable: boolean;
   courseList: ICourse[];
 
   constructor() {

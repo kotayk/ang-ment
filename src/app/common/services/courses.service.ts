@@ -12,8 +12,12 @@ export class CoursesService {
 
   constructor(private http: HttpClient) {}
 
-  getList(): Observable<ICourse[]> {
-    return this.http.get<ICourse[]>('http://localhost:3004/courses' );
+  getList(page?): Observable<ICourse[]> {
+    if (page) {
+      return this.http.get<ICourse[]>('http://localhost:3004/courses', {params: {start: page.start, count: page.count}});
+    } else {
+      return this.http.get<ICourse[]>('http://localhost:3004/courses');
+    }
   }
 
   createCourse() {
