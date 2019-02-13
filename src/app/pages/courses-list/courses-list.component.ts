@@ -1,4 +1,4 @@
-import {Component, OnInit, OnChanges, DoCheck, AfterContentChecked, AfterViewChecked, AfterContentInit, AfterViewInit, OnDestroy} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {IBreadcrumb} from '../../interfaces/ibreadcrumb';
 import {ICourse} from '../../interfaces/icourse';
 import {CoursesService} from '../../common/services/courses.service';
@@ -8,71 +8,68 @@ import {CoursesService} from '../../common/services/courses.service';
   templateUrl: './courses-list.component.html',
   styleUrls: ['./courses-list.component.scss']
 })
-export class CoursesListComponent implements
-  OnInit,
-  OnChanges,
-  DoCheck,
-  AfterViewInit,
-  AfterContentInit,
-  AfterViewChecked, AfterContentChecked,
-  OnDestroy {
+export class CoursesListComponent implements OnInit {
 
   breadcrumbsPath: IBreadcrumb[];
   courses: ICourse[];
   searchQuery: string;
+  page: number;
+  PAGE_SIZE: number;
+  moreAvailable: boolean;
 
   constructor(private coursesService: CoursesService) {}
 
   ngOnInit() {
-    console.log('on init')
+    this.page = 0;
+    this.PAGE_SIZE = 10;
+    this.moreAvailable = true;
     this.breadcrumbsPath = [
       {title: 'Courses', isClickable: false},
     ];
-    this.courses = this.coursesService.getList();
+    this.courses = [];
+    this.coursesService.getList(this.getPage(this.page)).subscribe((courses) => {
+      this.courses = courses;
+    });
     this.searchQuery = '';
+  }
+
+  getPage(pageNumber) {
+    return {
+      start: pageNumber * this.PAGE_SIZE,
+      count: this.PAGE_SIZE,
+    };
   }
 
   onSearchClick(query: string) {
     this.searchQuery = query;
-  }
-
-  onCourseDelete(course: ICourse) {
-    if (confirm(`You sure yo delete course "${course.title}"?`)) {
-      this.coursesService.removeItem(course.id);
-      this.courses = this.coursesService.getList();
-    }
+    this.page = 0;
+    this.moreAvailable = true;
+    this.coursesService.getList(this.getPage(this.page), this.searchQuery).subscribe((response) => {
+      this.courses = response;
+      if (!response.length) {
+        this.moreAvailable = false;
+      }
+    });
   }
 
   onLoadMoreCourses() {
-    console.log('load more courses');
+    this.page++;
+    this.coursesService.getList(this.getPage(this.page), this.searchQuery).subscribe((response) => {
+      this.courses = [...this.courses, ...response];
+      if (!response.length) {
+        this.moreAvailable = false;
+      }
+    });
   }
 
-  ngOnChanges() {
-    console.log('on changes');
-  }
-
-  ngDoCheck() {
-    console.log('do check');
-  }
-
-  ngAfterContentInit() {
-    console.log('after content init');
-  }
-
-  ngAfterContentChecked() {
-    console.log('after content checked');
-  }
-
-  ngAfterViewInit() {
-    console.log('after view init');
-  }
-
-  ngAfterViewChecked() {
-    console.log('after view checked');
-  }
-
-  ngOnDestroy() {
-    console.log('on destroy');
+  onCourseDelete(course: ICourse) {
+    if (confirm(`You sure yo delete course "${course.name}"?`)) {
+      this.coursesService.removeItem(course.id).subscribe(() => {
+        this.coursesService.getList({start: 0, count: (this.page + 1) * this.PAGE_SIZE}, this.searchQuery).subscribe((courses) => {
+          this.courses = courses;
+        });
+      });
+    }
   }
 
 }

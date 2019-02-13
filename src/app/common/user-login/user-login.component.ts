@@ -1,6 +1,4 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {IUser} from '../../interfaces/iuser';
-import {ICourse} from '../../interfaces/icourse';
 
 @Component({
   selector: 'app-user-login',
@@ -8,17 +6,15 @@ import {ICourse} from '../../interfaces/icourse';
   styleUrls: ['./user-login.component.scss']
 })
 export class UserLoginComponent implements OnInit {
-  @Input() userData: {isAuthenticated, user};
+  @Input() userData: any;
   @Output() logoutClick: EventEmitter<any> = new EventEmitter();
-  user: IUser;
   isAuthenticated: boolean;
 
   constructor() { }
 
-  ngOnInit() {
-    this.user = this.userData.user;
-    this.isAuthenticated = this.userData.isAuthenticated;
-  }
+  ngOnInit() {}
+
+
 
   onLogoutClick() {
     this.logoutClick.emit();

@@ -3,16 +3,16 @@
     <div class="course-item__info">
       <div class="course-item__info-inner">
         <div class="course-item__info-block course-item__title">
-          {{course.title | uppercase}}
+          {{course.name | uppercase}}
         </div>
-        <div [ngClass]="{'course-item__top-rated_empty': !course.topRated, 'course-item__top-rated_filled': course.topRated}" class="course-item__top-rated"></div>
+        <div [ngClass]="{'course-item__top-rated_empty': !course.isTopRated, 'course-item__top-rated_filled': course.isTopRated}" class="course-item__top-rated"></div>
       </div>
       <div class="course-item__info-inner">
         <div class="course-item__info-block">
           {{course.durationTime | courseDuration}}
         </div>
         <div class="course-item__info-block">
-          {{course.creationDate | date:'dd/MM/y'}}
+          {{course.date | date:'dd/MM/y'}}
         </div>
       </div>
     </div>

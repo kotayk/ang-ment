@@ -27,7 +27,7 @@ export class FreshCourseDirective implements OnInit {
   }
 
   ngOnInit() {
-    this.courseDate = new Date(this.course.creationDate).getTime();
+    this.courseDate = new Date(this.course.date).getTime();
     this.now = new Date().getTime();
     this.color = this.setColor();
     if (this.color) {

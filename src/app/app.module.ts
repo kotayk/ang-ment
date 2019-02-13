@@ -9,6 +9,8 @@ import {LoginModule} from './pages/login/login.module';
 import {BaseLayoutComponent} from './pages/base-layout/base-layout.component';
 import {CourseAddModule} from './pages/course-add/course-add.module';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
+import {AuthInterceptor} from './interceptors/auth.interceptor';
 
 @NgModule({
   declarations: [
@@ -18,13 +20,20 @@ import { NotFoundComponent } from './pages/not-found/not-found.component';
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     AppRoutingModule,
     CommonModule,
     CoursesListModule,
     CourseAddModule,
     LoginModule,
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {
