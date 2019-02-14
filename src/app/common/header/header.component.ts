@@ -16,7 +16,13 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.userData = {};
+    this.userData = {
+      fakeToken: '',
+      id: null,
+      login: '',
+      name: {first: '', last: ''},
+      password: ''
+    };
     this.authService.getUserInfo()
       .subscribe((response) => {
           this.userData = response;
