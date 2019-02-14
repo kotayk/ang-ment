@@ -11,6 +11,7 @@ import {CourseAddModule} from './pages/course-add/course-add.module';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {AuthInterceptor} from './interceptors/auth.interceptor';
+import {SpinnerInterceptor} from './interceptors/spinner.interceptor';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,11 @@ import {AuthInterceptor} from './interceptors/auth.interceptor';
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,
+      multi: true
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: SpinnerInterceptor,
       multi: true
     }
   ],
