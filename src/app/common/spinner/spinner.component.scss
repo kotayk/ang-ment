@@ -1,0 +1,14 @@
+.spinner {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: #eee;
+  opacity: 0.9;
+  z-index: 10000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  &__inner {
+    font-size: 36px;
+  }
+}
