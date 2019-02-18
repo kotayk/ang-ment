@@ -9,24 +9,14 @@ import {ActivatedRoute, Router} from '@angular/router';
 })
 export class HeaderComponent implements OnInit {
   @Input() hideLogin: boolean;
-  userData: object;
+  userData$: object;
 
   constructor(private authService: AuthService, private router: Router) {
 
   }
 
   ngOnInit() {
-    this.userData = {
-      fakeToken: '',
-      id: null,
-      login: '',
-      name: {first: '', last: ''},
-      password: ''
-    };
-    this.authService.getUserInfo()
-      .subscribe((response) => {
-          this.userData = response;
-        });
+    this.userData$ = this.authService.getUserInfo();
   }
 
   logout() {
