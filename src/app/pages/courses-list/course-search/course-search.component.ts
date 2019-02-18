@@ -1,7 +1,7 @@
 import {Component, ElementRef, EventEmitter, OnDestroy, OnInit, Output, ViewChild} from '@angular/core';
 import {Router} from '@angular/router';
 import {fromEvent, Observable, Subject, timer} from 'rxjs';
-import {debounce, filter, map, takeUntil} from 'rxjs/operators';
+import {debounce, debounceTime, filter, map, takeUntil} from 'rxjs/operators';
 
 @Component({
   selector: 'app-course-search',
@@ -22,7 +22,7 @@ export class CourseSearchComponent implements OnInit, OnDestroy {
     this.inputChange = fromEvent(this.searchInput.nativeElement, 'input').pipe(
       map((e: any) => e.target.value),
       filter((val: string) => val.length >= 3 || !val.length),
-      debounce(() => timer(500)),
+      debounceTime(500),
       takeUntil(this.unsubscribe)
   );
     this.inputChange.subscribe((val) => {
