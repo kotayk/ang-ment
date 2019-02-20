@@ -23,6 +23,13 @@ export function reducer(
         courses: action.payload
       };
     }
+    case CoursesActionTypes.AddPage: {
+      console.log('AddPage: ', action.newCourses)
+      return {
+        ...state,
+        courses: [...state.courses, ...action.newCourses]
+      };
+    }
     default:
       return state;
   }

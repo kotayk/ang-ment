@@ -32,10 +32,6 @@ export class CoursesListComponent implements OnInit {
     this.breadcrumbsPath = [
       {title: 'Courses', isClickable: false},
     ];
-    // this.courses = [];
-    // this.coursesService.getList(this.getPage(this.page)).subscribe((courses) => {
-    //   this.courses = courses;
-    // });
     this.store.dispatch(new Courses.GetList(this.getPage(this.page)));
     this.courses$ = this.store.pipe(select(fromCourses.getCourseList));
     this.searchQuery = '';
@@ -49,35 +45,28 @@ export class CoursesListComponent implements OnInit {
   }
 
   onSearchClick(query: string) {
-    // this.searchQuery = query;
-    // this.page = 0;
-    // this.moreAvailable = true;
-    // this.coursesService.getList(this.getPage(this.page), this.searchQuery).subscribe((response) => {
-    //   this.courses = response;
-    //   if (!response.length) {
-    //     this.moreAvailable = false;
-    //   }
-    // });
+    this.searchQuery = query;
+    this.page = 0;
+    this.moreAvailable = true;
+    this.store.dispatch(new Courses.GetList(this.getPage(this.page), this.searchQuery));
   }
 
   onLoadMoreCourses() {
-    // this.page++;
-    // this.coursesService.getList(this.getPage(this.page), this.searchQuery).subscribe((response) => {
-    //   this.courses = [...this.courses, ...response];
-    //   if (!response.length) {
-    //     this.moreAvailable = false;
-    //   }
-    // });
+    this.page++;
+    this.coursesService.getList(this.getPage(this.page), this.searchQuery).subscribe((response) => {
+      this.store.dispatch(new Courses.AddPage(response));
+      if (!response.length) {
+        this.moreAvailable = false;
+      }
+    });
   }
 
   onCourseDelete(course: ICourse) {
-    // if (confirm(`You sure yo delete course "${course.name}"?`)) {
-    //   this.coursesService.removeItem(course.id).subscribe(() => {
-    //     this.coursesService.getList({start: 0, count: (this.page + 1) * this.PAGE_SIZE}, this.searchQuery).subscribe((courses) => {
-    //       this.courses = courses;
-    //     });
-    //   });
-    // }
+    if (confirm(`You sure yo delete course "${course.name}"?`)) {
+      this.coursesService.removeItem(course.id).subscribe(() => {
+        this.store.dispatch(new Courses.GetList({start: 0, count: (this.page + 1) * this.PAGE_SIZE}, this.searchQuery));
+      });
+    }
   }
 
 }

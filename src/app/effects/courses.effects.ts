@@ -20,10 +20,10 @@ export class CoursesEffects {
   @Effect()
   getList$ = this.actions$.pipe(
     ofType(CoursesActionTypes.GetList),
-    map((action: GetList) => action.payload),
-    exhaustMap((params: object) =>
+    map((action: GetList) => ({paging: action.paging, searchQuery: action.searchQuery})),
+    exhaustMap((params: any) =>
       this.coursesService
-        .getList(params)
+        .getList(params.paging, params.searchQuery)
         .pipe(
           map((courses: ICourse[]) => new GetListSuccess(courses)),
           catchError(error => of(new GetListFailure(error)))
