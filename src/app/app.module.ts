@@ -17,6 +17,7 @@ import { reducers, metaReducers } from './reducers';
 import { EffectsModule } from '@ngrx/effects';
 import { AppEffects } from './app.effects';
 import {AuthEffects} from './effects/auth.effects';
+import {CoursesEffects} from './effects/courses.effects';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,7 @@ import {AuthEffects} from './effects/auth.effects';
     CourseAddModule,
     LoginModule,
     StoreModule.forRoot(reducers, { metaReducers }),
-    EffectsModule.forRoot([AppEffects, AuthEffects])
+    EffectsModule.forRoot([AppEffects, AuthEffects, CoursesEffects])
   ],
   providers: [
     {
