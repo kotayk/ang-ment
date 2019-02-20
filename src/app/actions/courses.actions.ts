@@ -6,6 +6,9 @@ export enum CoursesActionTypes {
   GetListSuccess = '[Courses] GetListSuccess',
   GetListFailure = '[Courses] GetListFailure',
   AddPage = '[Courses] AddPage',
+  CreateCourse = '[Courses] CreateCourse',
+  CreateCourseFailure = '[Courses] CreateCourseFailure',
+  CreateCourseSuccess = '[Courses] CreateCourseSuccess',
 }
 
 export class GetList implements Action {
@@ -32,8 +35,29 @@ export class GetListFailure implements Action {
   constructor(public payload: any) {}
 }
 
+export class CreateEditCourse implements Action {
+  readonly type = CoursesActionTypes.CreateCourse;
+
+  constructor(public course: ICourse, public isCreation: boolean) {}
+}
+
+export class CreateCourseSuccess implements Action {
+  readonly type = CoursesActionTypes.CreateCourseSuccess;
+
+  constructor() {}
+}
+
+export class CreateCourseFailure implements Action {
+  readonly type = CoursesActionTypes.CreateCourseFailure;
+
+  constructor(public payload: any) {}
+}
+
 export type CoursesActions =
   | GetList
   | AddPage
   | GetListSuccess
-  | GetListFailure;
+  | GetListFailure
+  | CreateEditCourse
+  | CreateCourseSuccess
+  | CreateCourseFailure;

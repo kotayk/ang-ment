@@ -11,7 +11,14 @@ import {of} from 'rxjs';
 //   LoginFailure,
 //   AuthActionTypes,
 // } from '../actions/auth.actions';
-import {CoursesActionTypes, GetList, GetListFailure, GetListSuccess} from '../actions/courses.actions';
+import {
+  CoursesActionTypes,
+  CreateEditCourse,
+  CreateCourseSuccess,
+  GetList,
+  GetListFailure,
+  GetListSuccess
+} from '../actions/courses.actions';
 import {CoursesService} from '../common/services/courses.service';
 import {ICourse} from '../interfaces/icourse';
 
@@ -31,11 +38,34 @@ export class CoursesEffects {
     )
   );
 
-  // @Effect({dispatch: false})
-  // getListSuccess$ = this.actions$.pipe(
-  //   ofType(CoursesActionTypes.GetListSuccess),
-  //   map((action: GetListSuccess) => action)
-  // );
+  @Effect()
+  createEditCourse$ = this.actions$.pipe(
+    ofType(CoursesActionTypes.CreateCourse),
+    map((action: CreateEditCourse) => ({course: action.course, isCreation: action.isCreation})),
+    exhaustMap((params: any) =>
+      params.isCreation
+        ? this.coursesService
+          .createCourse(params.course)
+          .pipe(
+            map(() => new CreateCourseSuccess()),
+            catchError(error => of(new GetListFailure(error)))
+          )
+        : this.coursesService
+          .updateItem(params.course)
+          .pipe(
+            map(() => new CreateCourseSuccess()),
+            catchError(error => of(new GetListFailure(error)))
+          )
+    )
+  );
+
+  @Effect({dispatch: false})
+  createCourseSuccess$ = this.actions$.pipe(
+    ofType(CoursesActionTypes.CreateCourseSuccess),
+    tap(() => {
+      this.router.navigateByUrl('/courses');
+    })
+  );
 
   // @Effect({dispatch: false})
   // getListFailure$ = this.actions$.pipe(
