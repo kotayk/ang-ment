@@ -25,6 +25,9 @@ export class AppComponent implements OnInit {
       }
       if (event instanceof NavigationEnd) {
         this.spinnerService.showSpinner(false);
+        if (event.url === '/login') {
+          this.spinnerService.resetSpinner();
+        }
       }
     });
   }

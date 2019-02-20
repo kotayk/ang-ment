@@ -12,5 +12,9 @@ export class SpinnerService {
     const counter = value ? this.requestsCounter.value + 1 : this.requestsCounter.value - 1;
     this.requestsCounter.next(counter);
   }
+
+  resetSpinner() {
+    this.requestsCounter.next(0);
+  }
 }
 
