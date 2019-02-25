@@ -15,15 +15,13 @@ export class LoginComponent implements OnInit {
   login: string;
   password: string;
 
-  constructor(private authService: AuthService,
-              private router: Router,
-              private store: Store<fromAuth.State>) {}
+  constructor(private authService: AuthService) {}
 
   ngOnInit() {
   }
 
   onLoginClick() {
-    this.store.dispatch(new Auth.Login({login: this.login, password: this.password}));
+    this.authService.dispatchLogin({login: this.login, password: this.password})
   }
 
 }

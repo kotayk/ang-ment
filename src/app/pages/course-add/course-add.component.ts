@@ -19,8 +19,7 @@ export class CourseAddComponent implements OnInit {
 
   constructor(private route: ActivatedRoute,
               private router: Router,
-              private coursesService: CoursesService,
-              private store: Store<fromCourses.State>) {
+              private coursesService: CoursesService) {
   }
 
   ngOnInit() {
@@ -58,9 +57,9 @@ export class CourseAddComponent implements OnInit {
 
   save() {
     if (this.courseCreation) {
-      this.store.dispatch(new Courses.CreateEditCourse(this.course, true), );
+      this.coursesService.dispatchCreateEditCourse(this.course, true);
     } else {
-      this.store.dispatch(new Courses.CreateEditCourse(this.course, false));
+      this.coursesService.dispatchCreateEditCourse(this.course, false);
     }
   }
 

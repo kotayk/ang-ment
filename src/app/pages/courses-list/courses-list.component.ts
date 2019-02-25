@@ -23,7 +23,7 @@ export class CoursesListComponent implements OnInit {
   PAGE_SIZE: number;
   moreAvailable: boolean;
 
-  constructor(private coursesService: CoursesService, private store: Store<fromCourses.State>) {}
+  constructor(private coursesService: CoursesService) {}
 
   ngOnInit() {
     this.page = 0;
@@ -32,8 +32,8 @@ export class CoursesListComponent implements OnInit {
     this.breadcrumbsPath = [
       {title: 'Courses', isClickable: false},
     ];
-    this.store.dispatch(new Courses.GetList(this.getPage(this.page)));
-    this.courses$ = this.store.pipe(select(fromCourses.getCourseList));
+    this.coursesService.dispatchGetList(this.getPage(this.page));
+    this.courses$ = this.coursesService.connectCoursesToStore();
     this.searchQuery = '';
   }
 
@@ -48,13 +48,13 @@ export class CoursesListComponent implements OnInit {
     this.searchQuery = query;
     this.page = 0;
     this.moreAvailable = true;
-    this.store.dispatch(new Courses.GetList(this.getPage(this.page), this.searchQuery));
+    this.coursesService.dispatchGetList(this.getPage(this.page), this.searchQuery);
   }
 
   onLoadMoreCourses() {
     this.page++;
     this.coursesService.getList(this.getPage(this.page), this.searchQuery).subscribe((response) => {
-      this.store.dispatch(new Courses.AddPage(response));
+      this.coursesService.dispatchAddPage(response);
       if (!response.length) {
         this.moreAvailable = false;
       }
@@ -64,7 +64,7 @@ export class CoursesListComponent implements OnInit {
   onCourseDelete(course: ICourse) {
     if (confirm(`You sure yo delete course "${course.name}"?`)) {
       this.coursesService.removeItem(course.id).subscribe(() => {
-        this.store.dispatch(new Courses.GetList({start: 0, count: (this.page + 1) * this.PAGE_SIZE}, this.searchQuery));
+        this.coursesService.dispatchGetList({start: 0, count: (this.page + 1) * this.PAGE_SIZE}, this.searchQuery);
       });
     }
   }

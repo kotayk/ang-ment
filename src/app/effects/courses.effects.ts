@@ -5,12 +5,7 @@ import {tap, map, exhaustMap, catchError} from 'rxjs/operators';
 import {AuthService} from '../common/services/auth.service';
 import {of} from 'rxjs';
 
-// import {
-//   Login,
-//   LoginSuccess,
-//   LoginFailure,
-//   AuthActionTypes,
-// } from '../actions/auth.actions';
+
 import {
   CoursesActionTypes,
   CreateEditCourse,

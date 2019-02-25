@@ -2,13 +2,16 @@ import {Injectable} from '@angular/core';
 import {IUser} from '../../interfaces/iuser';
 import {Observable} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
+import * as Auth from '../../actions/auth.actions';
+import {Store} from '@ngrx/store';
+import * as fromAuth from '../../reducers/auth.reducer';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private store: Store<fromAuth.State>) {
   }
 
   login(user): Observable<any> {
@@ -37,6 +40,18 @@ export class AuthService {
 
   getUserInfo(): Observable<any> {
     return this.http.post('http://localhost:3004/auth/userinfo', {});
+  }
+
+  dispatchLogin(payload) {
+    this.store.dispatch(new Auth.Login(payload));
+  }
+
+  dispatchRedirect() {
+    this.store.dispatch(new Auth.LoginRedirect());
+  }
+
+  dispatchLogout() {
+    this.store.dispatch(new Auth.Logout());
   }
 
 }

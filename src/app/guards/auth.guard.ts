@@ -12,7 +12,7 @@ import * as Auth from '../actions/auth.actions';
 })
 export class AuthGuard implements CanActivate {
 
-  constructor(private router: Router, private authService: AuthService, private store: Store<fromAuth.State>) { }
+  constructor(private router: Router, private authService: AuthService) { }
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
@@ -21,7 +21,7 @@ export class AuthGuard implements CanActivate {
       if (isAuth) {
         observer.next(isAuth);
       } else {
-        this.store.dispatch(new Auth.LoginRedirect());
+        this.authService.dispatchRedirect();
       }
       observer.complete();
     });

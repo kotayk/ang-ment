@@ -16,23 +16,21 @@ export class HeaderComponent implements OnInit {
   @Input() hideLogin: boolean;
   userData$: object;
 
-  constructor(private authService: AuthService,
-              private router: Router,
-              private store: Store<fromAuth.State>) {
+  constructor(private authService: AuthService) {
 
   }
 
   ngOnInit() {
     this.userData$ = this.authService.getUserInfo().pipe(
       catchError(err => {
-        this.store.dispatch(new Auth.LoginRedirect());
+        this.authService.dispatchRedirect();
         return throwError(err);
       })
     );
   }
 
   logout() {
-    this.store.dispatch(new Auth.Logout());
+    this.authService.dispatchLogout();
   }
 
 }
