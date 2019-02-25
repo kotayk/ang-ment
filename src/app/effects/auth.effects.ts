@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Router} from '@angular/router';
 import {Effect, Actions, ofType} from '@ngrx/effects';
-import {tap, map, exhaustMap, catchError} from 'rxjs/operators';
+import {tap, map, exhaustMap, catchError, mergeMap, filter, take} from 'rxjs/operators';
 import {AuthService} from '../common/services/auth.service';
 import {of} from 'rxjs';
 
@@ -9,7 +9,7 @@ import {
   Login,
   LoginSuccess,
   LoginFailure,
-  AuthActionTypes,
+  AuthActionTypes, GetUserInfoSuccess, GetUserInfoFailure,
 } from '../actions/auth.actions';
 
 @Injectable()
@@ -47,9 +47,29 @@ export class AuthEffects {
     })
   );
 
-  @Effect({ dispatch: false })
+  @Effect({dispatch: false})
   loginRedirect$ = this.actions$.pipe(
-    ofType(AuthActionTypes.LoginRedirect, AuthActionTypes.Logout),
+    ofType(AuthActionTypes.LoginRedirect),
+    tap(() => {
+      this.router.navigate(['/login']);
+    })
+  );
+
+  @Effect()
+  getUserInfo$ = this.actions$.pipe(
+    ofType(AuthActionTypes.GetUserInfo),
+    exhaustMap(() =>
+      this.authService.getUserInfo()
+        .pipe(
+          map(response => new GetUserInfoSuccess(response)),
+          catchError(error => of(new GetUserInfoFailure()))
+        )
+    )
+  );
+
+  @Effect({dispatch: false})
+  getUserInfoFailure$ = this.actions$.pipe(
+    ofType(AuthActionTypes.GetUserInfoFailure),
     tap(() => {
       this.router.navigate(['/login']);
     })

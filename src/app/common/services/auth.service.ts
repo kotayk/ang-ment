@@ -3,8 +3,11 @@ import {IUser} from '../../interfaces/iuser';
 import {Observable} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
 import * as Auth from '../../actions/auth.actions';
-import {Store} from '@ngrx/store';
+import {select, Store} from '@ngrx/store';
 import * as fromAuth from '../../reducers/auth.reducer';
+import * as Courses from '../../actions/courses.actions';
+import {ICourse} from '../../interfaces/icourse';
+import * as fromCourses from '../../reducers/courses.reducer';
 
 @Injectable({
   providedIn: 'root'
@@ -52,6 +55,14 @@ export class AuthService {
 
   dispatchLogout() {
     this.store.dispatch(new Auth.Logout());
+  }
+
+  dispatchGetUserData() {
+    this.store.dispatch(new Auth.GetUserInfo());
+  }
+
+  connectUserDataToStore() {
+    return this.store.pipe(select(fromAuth.getUserData));
   }
 
 }

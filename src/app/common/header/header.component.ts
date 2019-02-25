@@ -21,12 +21,8 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.userData$ = this.authService.getUserInfo().pipe(
-      catchError(err => {
-        this.authService.dispatchRedirect();
-        return throwError(err);
-      })
-    );
+    this.authService.dispatchGetUserData();
+    this.userData$ = this.authService.connectUserDataToStore();
   }
 
   logout() {
