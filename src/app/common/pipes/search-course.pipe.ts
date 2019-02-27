@@ -7,6 +7,9 @@ import {ICourse} from '../../interfaces/icourse';
 export class SearchCoursePipe implements PipeTransform {
 
   transform(array: ICourse[], args?: any): any {
+    if (!array.length) {
+      return [];
+    }
     const query = args ? args[0] : '';
     const courseItems = array.slice(0);
     const filteredArray = courseItems.filter(course =>

@@ -15,11 +15,12 @@ const routes: Routes = [
     component: BaseLayoutComponent,
     canActivate: [AuthGuard],
     children: [
-      {path: 'courses', component: CoursesListComponent, pathMatch: 'full'},
+      {path: 'courses', component: CoursesListComponent, pathMatch: 'full', canActivate: [AuthGuard]},
       {
         path: 'courses/new',
         component: CourseAddComponent,
-        pathMatch: 'full'
+        pathMatch: 'full',
+        canActivate: [AuthGuard]
       },
       {
         path: 'courses/:id',
@@ -27,7 +28,8 @@ const routes: Routes = [
         resolve: {
           course: CourseDetailsResolverService
         },
-        pathMatch: 'full'
+        pathMatch: 'full',
+        canActivate: [AuthGuard]
       },
       {path: '', redirectTo: '/courses', pathMatch: 'full'},
     ]

@@ -3,6 +3,9 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {ICourse} from '../../interfaces/icourse';
 import {CoursesService} from '../../common/services/courses.service';
 import {IBreadcrumb} from '../../interfaces/ibreadcrumb';
+import {Store} from '@ngrx/store';
+import * as fromCourses from '../../reducers/courses.reducer';
+import * as Courses from '../../actions/courses.actions';
 
 @Component({
   selector: 'app-course-add',
@@ -54,13 +57,9 @@ export class CourseAddComponent implements OnInit {
 
   save() {
     if (this.courseCreation) {
-      this.coursesService.createCourse(this.course).subscribe(() => {
-        this.router.navigate(['/courses/']);
-      });
+      this.coursesService.dispatchCreateEditCourse(this.course, true);
     } else {
-      this.coursesService.updateItem(this.course).subscribe(() => {
-        this.router.navigate(['/courses/']);
-      });
+      this.coursesService.dispatchCreateEditCourse(this.course, false);
     }
   }
 

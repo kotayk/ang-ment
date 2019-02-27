@@ -12,6 +12,12 @@ import { NotFoundComponent } from './pages/not-found/not-found.component';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {AuthInterceptor} from './interceptors/auth.interceptor';
 import {SpinnerInterceptor} from './interceptors/spinner.interceptor';
+import {StoreModule} from '@ngrx/store';
+import { reducers, metaReducers } from './reducers';
+import { EffectsModule } from '@ngrx/effects';
+import { AppEffects } from './app.effects';
+import {AuthEffects} from './effects/auth.effects';
+import {CoursesEffects} from './effects/courses.effects';
 
 @NgModule({
   declarations: [
@@ -27,6 +33,8 @@ import {SpinnerInterceptor} from './interceptors/spinner.interceptor';
     CoursesListModule,
     CourseAddModule,
     LoginModule,
+    StoreModule.forRoot(reducers, { metaReducers }),
+    EffectsModule.forRoot([AppEffects, AuthEffects, CoursesEffects])
   ],
   providers: [
     {

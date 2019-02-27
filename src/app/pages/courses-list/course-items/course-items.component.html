@@ -1,4 +1,4 @@
-<div class="course-items">
+<div *ngIf="courseList" class="course-items">
   <app-course-item *ngFor="let course of courseList | orderByCreationDate: false"
                    [course]="course"
                    (deleteCourse)="onCourseDelete(course)"

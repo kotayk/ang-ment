@@ -7,6 +7,9 @@ import {Course} from '../../models/course';
 export class OrderByCreationDatePipe implements PipeTransform {
 
   transform(array: Course[], args?: any): any {
+    if (!array.length) {
+      return [];
+    }
     const asc = args ? args[0] : false;
     const courseItems = array.slice(0);
     courseItems.sort((a: any, b: any) => {
