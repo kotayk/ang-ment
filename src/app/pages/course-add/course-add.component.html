@@ -29,7 +29,7 @@
       <div class="course-add-form__label">Duration:</div>
       <div class="course-add-form__field-box">
         <input formControlName="durationTime" name="durationTime" type="text" class="course-add-form__input">
-        <div class="course-add-form__duration">{{course.durationTime | courseDuration}}</div>
+        <div class="course-add-form__duration">{{f.durationTime.value | courseDuration}}</div>
       </div>
       <div *ngIf="(f.durationTime.dirty || f.durationTime.touched) && f.durationTime.invalid" class="course-add-form__errors">
         <div *ngIf="f.durationTime.errors.required" class="course-add-form__error">Field is required</div>
