@@ -1,23 +1,39 @@
 <app-breadcrumbs [path]="breadcrumbsPath"></app-breadcrumbs>
 <div class="course-add">
-  <form class="course-add-form">
+  <form #courseAddEditForm="ngForm" (ngSubmit)="onFormSubmit()" [formGroup]="courseAddEdit" class="course-add-form">
     <div class="course-add-form__field">
       <div class="course-add-form__label">Title:</div>
-      <input [(ngModel)]="course.name" name="name" type="text" class="course-add-form__input course-add-form__input_full-width">
+      <input id="name" formControlName="name" name="name" type="text" class="course-add-form__input course-add-form__input_full-width">
+      <div *ngIf="(f.name.dirty || f.name.touched) && f.name.invalid" class="course-add-form__errors">
+        <div *ngIf="f.name.errors.required" class="course-add-form__error">Field is required</div>
+        <div *ngIf="f.name.errors.maxlength" class="course-add-form__error">Max length is 50</div>
+      </div>
     </div>
     <div class="course-add-form__field">
       <div class="course-add-form__label">Description:</div>
-      <textarea [(ngModel)]="course.description" name="description" id="" cols="30" rows="10" class="course-add-form__textarea"></textarea>
+      <textarea formControlName="description" name="description" id="" cols="30" rows="10" class="course-add-form__textarea"></textarea>
+      <div *ngIf="(f.description.dirty || f.description.touched) && f.description.invalid" class="course-add-form__errors">
+        <div *ngIf="f.description.errors.required" class="course-add-form__error">Field is required</div>
+        <div *ngIf="f.description.errors.maxlength" class="course-add-form__error">Max length is 500</div>
+      </div>
     </div>
     <div class="course-add-form__field">
       <div class="course-add-form__label">Date:</div>
-      <input [ngModel]="course.date | date:'yyyy-MM-dd'" (ngModelChange)="course.date=$event" type="date" name="date" class="course-add-form__input">
+      <input formControlName="date" type="text" name="date" class="course-add-form__input">
+      <div *ngIf="(f.date.dirty || f.date.touched) && f.date.invalid" class="course-add-form__errors">
+        <div *ngIf="f.date.errors.required" class="course-add-form__error">Field is required</div>
+        <div *ngIf="f.date.errors.regexpError" class="course-add-form__error">Date should be dd/mm/yyyy</div>
+      </div>
     </div>
     <div class="course-add-form__field">
       <div class="course-add-form__label">Duration:</div>
       <div class="course-add-form__field-box">
-        <input name="durationTime" [(ngModel)]="course.durationTime" type="number" class="course-add-form__input">
-        <div class="course-add-form__duration">{{course.durationTime | courseDuration}}</div>
+        <input formControlName="durationTime" name="durationTime" type="text" class="course-add-form__input">
+        <div class="course-add-form__duration">{{f.durationTime.value | courseDuration}}</div>
+      </div>
+      <div *ngIf="(f.durationTime.dirty || f.durationTime.touched) && f.durationTime.invalid" class="course-add-form__errors">
+        <div *ngIf="f.durationTime.errors.required" class="course-add-form__error">Field is required</div>
+        <div *ngIf="f.durationTime.errors.regexpError" class="course-add-form__error">Only numbers allowed</div>
       </div>
     </div>
     <div class="course-add-form__field">
@@ -26,7 +42,7 @@
     </div>
     <div class="course-add-form__buttons">
       <div class="course-add-form__button">
-        <app-button (buttonClick)="save($event)" title="Save"></app-button>
+        <app-button [isDisabled]="!courseAddEdit.valid" (buttonClick)="save($event)" title="Save"></app-button>
       </div>
       <div class="course-add-form__button">
         <app-button (buttonClick)="cancel($event)" title="Cancel"></app-button>
