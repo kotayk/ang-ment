@@ -1,4 +1,4 @@
-<div class="button" [ngClass]="{'button_flex-block': flexBlock}" (click)="onButtonClick($event)">
+<div class="button" [ngClass]="{'button_flex-block': flexBlock, disabled: isDisabled}" (click)="onButtonClick($event)">
   <img *ngIf="icon" [src]="icon" class="button__icon">
   <div class="button__title">{{title}}</div>
 </div>

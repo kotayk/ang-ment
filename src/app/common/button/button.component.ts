@@ -10,10 +10,13 @@ export class ButtonComponent implements OnInit {
   @Input() title: string;
   @Input() icon: string;
   @Input() flexBlock: boolean;
+  @Input() isDisabled: boolean;
   @Output() buttonClick: EventEmitter<any> = new EventEmitter();
 
   onButtonClick(event: any) {
-    this.buttonClick.emit(event);
+    if (!this.isDisabled) {
+      this.buttonClick.emit(event);
+    }
   }
 
   constructor() { }

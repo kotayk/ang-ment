@@ -1,7 +1,7 @@
 import {NgModule} from '@angular/core';
 import {CommonModule as ngCommon} from '@angular/common';
 import {CourseAddComponent} from './course-add.component';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {CommonModule} from 'src/app/common/common.module';
 
 @NgModule({
@@ -10,6 +10,7 @@ import {CommonModule} from 'src/app/common/common.module';
     ngCommon,
     CommonModule,
     FormsModule,
+    ReactiveFormsModule
   ]
 })
 export class CourseAddModule {
